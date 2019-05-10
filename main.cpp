@@ -79,52 +79,52 @@ void selectionSort(double array[])
 
 void runQuickSort(array[])
 {
-    clock_t start;
+    clock_t startTime;
     double duration;
     int start =  0;
     int end = array.length();
     
-    start = clock();
+    startTime = clock();
     
     quickSort(array, start, end);
 
-    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Quick Sort ran for :  "<< duration << endl;
 }
 
 void runInsertionSort(double array[])
 {
-    clock_t start;
+    clock_t startTime;
     double duration;
-    start = clock();
+    startTime = clock();
     
     insertionSort(array);
 
-    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Insertion Sort ran for :  "<< duration << endl;
 }
 
 void runBubbleSort(double array[])
 {
-    clock_t start;
+    clock_t startTime;
     double duration;
-    start = clock();
+    startTime = clock();
     
     bubbleSort(array);
 
-    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Bubble Sort ran for :  "<< duration << endl;
 }
 
 void runSelectionSort(double array[])
 {
-    clock_t start;
+    clock_t startTime;
     double duration;
-    start = clock();
+    startTime = clock();
     
     selectionSort(array);
 
-    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Selection Sort ran for :  "<< duration << endl;
 }
 
