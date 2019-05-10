@@ -72,7 +72,16 @@ void selectionSort(double array[])
     minIndex = i;
     for(int j = i + 1; j < array.length(); j++;)
     {
-      
+      if(array[i] < array[minIndex])
+      {
+        minIndex = j;
+      }
+    }
+    if(minIndex != i)
+    {
+      temp = array[i];
+      array[i] = array[minIndex];
+      array[minIndex] = temp;
     }
   }
 }
