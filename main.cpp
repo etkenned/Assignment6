@@ -1,9 +1,10 @@
 #include <iostream>
-
+#include <cstdio>
+#include <ctime>
 using namespace std;
 
 
-void quickSort(array[], int start, int end)//starting index and ending index
+void quickSort(double array[], int start, int end)//starting index and ending index
 {
     if(start < end)
     {
@@ -76,8 +77,63 @@ void selectionSort(double array[])
   }
 }
 
+void runQuickSort(array[])
+{
+    clock_t start;
+    double duration;
+    int start =  0;
+    int end = array.length();
+    
+    start = clock();
+    
+    quickSort(array, start, end);
+
+    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    cout<<"Quick Sort ran for :  "<< duration << endl;
+}
+
+void runInsertionSort(double array[])
+{
+    clock_t start;
+    double duration;
+    start = clock();
+    
+    insertionSort(array);
+
+    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    cout<<"Insertion Sort ran for :  "<< duration << endl;
+}
+
+void runBubbleSort(double array[])
+{
+    clock_t start;
+    double duration;
+    start = clock();
+    
+    bubbleSort(array);
+
+    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    cout<<"Bubble Sort ran for :  "<< duration << endl;
+}
+
+void runSelectionSort(double array[])
+{
+    clock_t start;
+    double duration;
+    start = clock();
+    
+    selectionSort(array);
+
+    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    cout<<"Selection Sort ran for :  "<< duration << endl;
+}
 
 int main(int argc, char** argv)
 {
-
+    //bla bla get the file into a double array
+    //double array[] = //input file;
+    runQuickSort(array);
+    runInsertionSort(array);
+    runBubbleSort(array);
+    runSelectionSort(array);
 }
