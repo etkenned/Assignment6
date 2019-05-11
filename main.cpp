@@ -92,6 +92,7 @@ void selectionSort(double array[], int end)
 void runQuickSort(double array[], int end)
 {
     clock_t startTime;
+    clock_t endTime;
     double duration;
     int start =  0;
 
@@ -99,44 +100,59 @@ void runQuickSort(double array[], int end)
 
     quickSort(array, start, end);
 
-    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
-    cout<<"Quick Sort ran for :  "<< duration << endl;
+    endTime = clock();
+
+    duration = (endTime - startTime) / (double) CLOCKS_PER_SEC;
+    cout<<"Quick Sort ran from :  "<< startTime << " to " << endTime << endl;
+    cout<<"Resulting in a runtime of : " << duration << endl;
 }
 
 void runInsertionSort(double array[], int end)
 {
     clock_t startTime;
+    clock_t endTime;
     double duration;
     startTime = clock();
 
     insertionSort(array, end);
 
-    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
-    cout<<"Insertion Sort ran for :  "<< duration << endl;
+    endTime = clock();
+
+    duration = (endTime - startTime) / (double) CLOCKS_PER_SEC;
+    cout<<"Insertion Sort ran from :  "<< startTime << " to " << endTime << endl;
+    cout<<"Resulting in a runtime of : " << duration << endl;
 }
 
 void runBubbleSort(double array[], int end)
 {
     clock_t startTime;
+    clock_t endTime;
     double duration;
     startTime = clock();
 
     bubbleSort(array, end);
 
-    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
-    cout<<"Bubble Sort ran for :  "<< duration << endl;
+    endTime = clock();
+
+    duration = (endTime - startTime) / (double) CLOCKS_PER_SEC;
+    cout<<"Bubble Sort ran from :  "<< startTime << " to " << endTime << endl;
+    cout<<"Resulting in a runtime of : " << duration << endl;
 }
 
 void runSelectionSort(double array[], int end)
 {
     clock_t startTime;
+    clock_t endTime;
     double duration;
     startTime = clock();
 
     selectionSort(array, end);
 
-    duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
-    cout<<"Selection Sort ran for :  "<< duration << endl;
+    endTime = clock();
+
+    duration = (endTime - startTime) / (double) CLOCKS_PER_SEC;
+    cout<<"Selection Sort ran from :  "<< startTime << " to " << endTime << endl;
+    cout<<"Resulting in a runtime of : " << duration << endl;
 }
 
 int main(int argc, char** argv)
@@ -147,6 +163,11 @@ int main(int argc, char** argv)
   if(argc > 1) // checks for user input of file name
   {
     fileName = argv[1];
+  }
+  else
+  {
+    cout << "Enter the name of the file " << endl;
+    getline(cin, fileName);
   }
   fstream inputFile(fileName);
   if(inputFile.is_open())
