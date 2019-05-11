@@ -1,21 +1,12 @@
 #include <iostream>
 #include <cstdio>
 #include <ctime>
+#include <fstream>
 using namespace std;
 
-
-void quickSort(double array[], int start, int end)//starting index and ending index
+int partition(double array[], int start, int end) // part of quickSort
 {
-    if(start < end)
-    {
-        partitionIndex = partition(array, start, end);
-        quickSort(array, start, partitionIndex - 1);
-        quickSort(array, partitionIndex + 1, end);
-    }
-}
-int partition (double array[], int start, int end) // part of quickSort
-{
-    double pivot = array[end];
+    double pivot = array[end-1];
     int i = (start - 1); // Index of smaller element
 
     for (int j = start; j <= end - 1; j++)
@@ -23,35 +14,47 @@ int partition (double array[], int start, int end) // part of quickSort
         if (array[j] <= pivot)// If current element is smaller than or equal to pivot
         {
             i++;    // increment index of smaller element
-            swap array[i] and array[j];
+            double temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
         }
     }
-    swap array[i + 1] and array[end]);
+    double temp2 = array[i + 1];
+    array[i + 1] = array[end - 1];
+    array[end - 1] = temp2;
     return (i + 1);
+}
+void quickSort(double array[], int start, int end)//starting index and ending index
+{
+    if(start < end)
+    {
+        int partitionIndex = partition(array, start, end);
+        quickSort(array, start, partitionIndex - 1);
+        quickSort(array, partitionIndex + 1, end);
+    }
 }
 
 
-void insertionSort(double[] array)
+
+void insertionSort(double array[], int end)
 {
-  for(int i = 0; i < array.length(); i++)
+  for(int i = 0; i < end - 1; i++)
   {
-    double temp = array[i]; //store marked item
-    int k = i; //where to start shifting
-    while(k > 0 && array[k-1] >= temp)//while left num is larger, shift
+    for(int j = i; j > 0 && array[j-1] > array[j]; j--)
     {
-      array[] = array[k-1];
-      k--;
+      double temp = array[j];
+      array[j] = array[j - 1];
+      array[j - 1] = temp;
     }
-    array[k] = temp; // put marked item in the right spot
   }
 }
 
-void bubbleSort(double array[])
+void bubbleSort(double array[], int end)
 {
-  for(int i = 0; i < array.length() - 1; i++)
+  for(int i = 0; i < end - 1; i++)
   {
     double temp = 0;
-    for(int j = 0; j < array.length() - 2; j++)
+    for(int j = 0; j < end - 2; j++)
     {
       if(array[j] > array[j+1])
       {
@@ -63,14 +66,14 @@ void bubbleSort(double array[])
   }
 }
 
-void selectionSort(double array[])
+void selectionSort(double array[], int end)
 {
   int minIndex;
   double temp;
-  for(int i = 0; i < array.length(); i++)
+  for(int i = 0; i < end - 1; i++)
   {
     minIndex = i;
-    for(int j = i + 1; j < array.length(); j++;)
+    for(int j = i + 1; j < end - 1; j++)
     {
       if(array[i] < array[minIndex])
       {
@@ -86,52 +89,51 @@ void selectionSort(double array[])
   }
 }
 
-void runQuickSort(array[])
+void runQuickSort(double array[], int end)
 {
     clock_t startTime;
     double duration;
     int start =  0;
-    int end = array.length();
-    
+
     startTime = clock();
-    
+
     quickSort(array, start, end);
 
     duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Quick Sort ran for :  "<< duration << endl;
 }
 
-void runInsertionSort(double array[])
+void runInsertionSort(double array[], int end)
 {
     clock_t startTime;
     double duration;
     startTime = clock();
-    
-    insertionSort(array);
+
+    insertionSort(array, end);
 
     duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Insertion Sort ran for :  "<< duration << endl;
 }
 
-void runBubbleSort(double array[])
+void runBubbleSort(double array[], int end)
 {
     clock_t startTime;
     double duration;
     startTime = clock();
-    
-    bubbleSort(array);
+
+    bubbleSort(array, end);
 
     duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Bubble Sort ran for :  "<< duration << endl;
 }
 
-void runSelectionSort(double array[])
+void runSelectionSort(double array[], int end)
 {
     clock_t startTime;
     double duration;
     startTime = clock();
-    
-    selectionSort(array);
+
+    selectionSort(array, end);
 
     duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
     cout<<"Selection Sort ran for :  "<< duration << endl;
@@ -139,10 +141,37 @@ void runSelectionSort(double array[])
 
 int main(int argc, char** argv)
 {
-    //bla bla get the file into a double array
-    //double array[] = //input file;
-    runQuickSort(array);
-    runInsertionSort(array);
-    runBubbleSort(array);
-    runSelectionSort(array);
+
+  string fileName;
+  double input; // used for inputing the data from the file
+  if(argc > 1) // checks for user input of file name
+  {
+    fileName = argv[1];
+  }
+  fstream inputFile(fileName);
+  if(inputFile.is_open())
+  {
+    string line;
+    getline(inputFile,line); // gets he number of lines of data for array size
+    int numData = stoi(line);
+    double array1[numData];
+    double array2[numData];
+    double array3[numData];
+    double array4[numData];
+    int index = 0;
+    while(getline(inputFile,line))//saves 4 copies of the arrays
+    {
+      input = stod(line);
+      array1[index] = input;
+      array2[index] = input;
+      array3[index] = input;
+      array4[index] = input;
+      index++;
+    }
+    runQuickSort(array1, numData);
+    runInsertionSort(array2, numData);
+    runBubbleSort(array3, numData);
+    runSelectionSort(array4, numData);
+  }
+
 }
